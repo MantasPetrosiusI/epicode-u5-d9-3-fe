@@ -1,7 +1,8 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { Alert, ListGroup, Container, Row, Table } from "react-bootstrap"
+import { Alert, Container, Row, Table } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 const UsersComponent = () => {
   const [users, setUsers] = useState([])
@@ -9,8 +10,6 @@ const UsersComponent = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const url = "http://localhost:3001/users"
-
     const fetchData = async () => {
       try {
         const { data } = await axios("http://localhost:3001/users", {
@@ -18,16 +17,18 @@ const UsersComponent = () => {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         })
+        toast("Users list loaded successfully 💪", { autoClose: 1000 })
         setUsers(data)
         setError("")
       } catch (error) {
         console.log(error)
+        toast.error(error.message)
         navigate("/login")
       }
     }
 
     fetchData()
-  }, [])
+  }, [navigate])
 
   return (
     <Container>

@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 const LoginComponent = () => {
   const [email, setEmail] = useState("")
@@ -16,6 +17,7 @@ const LoginComponent = () => {
         email,
         password,
       })
+      toast("Login successfull! 💪", { autoClose: 1000 })
       localStorage.setItem("accessToken", data.accessToken)
       navigate("/users")
     } catch (error) {
