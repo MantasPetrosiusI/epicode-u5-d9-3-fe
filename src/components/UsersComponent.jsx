@@ -1,34 +1,34 @@
-import axios from "axios"
-import { useState, useEffect } from "react"
-import { Alert, Container, Row, Table } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Alert, Container, Row, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UsersComponent = () => {
-  const [users, setUsers] = useState([])
-  const [error, setError] = useState("")
-  const navigate = useNavigate()
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios("http://localhost:3001/users", {
+        const { data } = await axios(`${process.env.REACT_APP_BE_URL}/users`, {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
-        })
-        toast("Users list loaded successfully 💪", { autoClose: 1000 })
-        setUsers(data)
-        setError("")
+        });
+        toast("Users list loaded successfully 💪", { autoClose: 1000 });
+        setUsers(data);
+        setError("");
       } catch (error) {
-        console.log(error)
-        toast.error(error.message)
-        navigate("/login")
+        console.log(error);
+        toast.error(error.message);
+        navigate("/login");
       }
-    }
+    };
 
-    fetchData()
-  }, [navigate])
+    fetchData();
+  }, [navigate]);
 
   return (
     <Container>
@@ -44,7 +44,7 @@ const UsersComponent = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
+            {users.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.firstName}</td>
@@ -56,7 +56,7 @@ const UsersComponent = () => {
         </Table>
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default UsersComponent
+export default UsersComponent;

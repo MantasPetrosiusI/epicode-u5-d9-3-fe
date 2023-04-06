@@ -1,17 +1,17 @@
-import { useSearchParams, useNavigate } from "react-router-dom"
-import { useEffect } from "react"
-import { Container, Row } from "react-bootstrap"
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Container, Row } from "react-bootstrap";
 
 const HomeComponent = () => {
-  const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem("accessToken")) navigate("/login")
+    if (!localStorage.getItem("accessToken")) navigate("/login");
     if (searchParams.get("accessToken")) {
-      localStorage.setItem("accessToken", searchParams.get("accessToken"))
-      navigate("/")
+      localStorage.setItem("accessToken", searchParams.get("accessToken"));
+      navigate("/");
     }
-  }, [navigate, searchParams])
+  }, [navigate, searchParams]);
 
   return (
     <Container>
@@ -19,7 +19,7 @@ const HomeComponent = () => {
         <h1> Welcome to our app!</h1>
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default HomeComponent
+export default HomeComponent;
