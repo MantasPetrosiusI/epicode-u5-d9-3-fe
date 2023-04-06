@@ -12,11 +12,14 @@ const UsersComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios(`${process.env.REACT_APP_BE_URL}/users`, {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        });
+        const { data } = await axios(
+          `${process.env.REACT_APP_BE_URL}/authors`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        );
         toast("Users list loaded successfully 💪", { autoClose: 1000 });
         setUsers(data);
         setError("");

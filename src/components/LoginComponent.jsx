@@ -22,7 +22,7 @@ const LoginComponent = () => {
       );
       toast("Login successfull! 💪", { autoClose: 1000 });
       localStorage.setItem("accessToken", data.accessToken);
-      navigate("/users");
+      navigate("/authors");
     } catch (error) {
       setError(error.response.data.message);
     }
