@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const LoginComponent = () => {
@@ -9,6 +9,7 @@ const LoginComponent = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const searchParams = useSearchParams();
 
   const handleSubmit = async (e) => {
     try {
